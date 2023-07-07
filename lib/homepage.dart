@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   int xScore = 0;
   int filledBoxes = 0;
   String resulutDeclaration = '';
+  bool winnerFound = false;
   static var customFontWhite = GoogleFonts.coiny(
       textStyle: TextStyle(
     color: Colors.white,
@@ -63,18 +64,64 @@ class _HomePageState extends State<HomePage> {
         title: Text('TIC TAK'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
+            Expanded(
+                child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        'player0',
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.green,
+                        ),
+                      ),
+                      Text(
+                        oScore.toString(),
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.green,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'playerx',
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Text(
+                        xScore.toString(),
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.red,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )),
             Container(
               height: MediaQuery.of(context).size.height * 0.5,
-              decoration: BoxDecoration(
-                  //     gradient: LinearGradient(
-                  //   colors: [Colors.red, Color(0xffee4036)],
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  // )
-                  borderRadius: BorderRadius.circular(10)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
@@ -136,7 +183,21 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 // flex: 2,
                 child: Text(resulutDeclaration,
-                    style: TextStyle(color: Colors.green, fontSize: 20.0)))
+                    style: TextStyle(color: Colors.green, fontSize: 20.0))),
+            // Expanded(
+            //     // flex: 2,
+            //     child: Text(resulutDeclaration,
+            //         style: TextStyle(color: Colors.red, fontSize: 20.0))),
+            ElevatedButton(
+                onPressed: () {},
+                child: Text(
+                  'clear board',
+                  style: GoogleFonts.quicksand(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: customFontWhite.backgroundColor,
+                  ),
+                ))
           ],
         ),
       ),
@@ -147,8 +208,10 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if (oTurn && displayXo[index] == '') {
         displayXo[index] = 'x';
+        filledBoxes++;
       } else if (!oTurn && displayXo[index] == '') {
         displayXo[index] = '0';
+        filledBoxes++;
       }
       oTurn = !oTurn;
       _checkwinner();
@@ -161,6 +224,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[0] == displayXo[2] &&
         displayXo[0] != '') {
       setState(() {
+        _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
       });
     }
@@ -169,6 +233,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[3] == displayXo[5] &&
         displayXo[3] != '') {
       setState(() {
+        _updateScore(displayXo[3]);
         resulutDeclaration = 'Player' + displayXo[3] + 'Wins!';
       });
     }
@@ -177,6 +242,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[6] == displayXo[8] &&
         displayXo[6] != '') {
       setState(() {
+        _updateScore(displayXo[6]);
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
       });
     }
@@ -185,6 +251,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[0] == displayXo[6] &&
         displayXo[0] != '') {
       setState(() {
+        _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
       });
     }
@@ -193,6 +260,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[1] == displayXo[7] &&
         displayXo[1] != '') {
       setState(() {
+        _updateScore(displayXo[1]);
         resulutDeclaration = 'Player' + displayXo[1] + 'Wins!';
       });
     }
@@ -201,6 +269,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[2] == displayXo[8] &&
         displayXo[2] != '') {
       setState(() {
+        _updateScore(displayXo[2]);
         resulutDeclaration = 'Player' + displayXo[2] + 'Wins!';
       });
     }
@@ -209,6 +278,7 @@ class _HomePageState extends State<HomePage> {
         displayXo[0] == displayXo[8] &&
         displayXo[0] != '') {
       setState(() {
+        _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
       });
     }
@@ -217,8 +287,23 @@ class _HomePageState extends State<HomePage> {
         displayXo[6] == displayXo[2] &&
         displayXo[6] != '') {
       setState(() {
+        _updateScore(displayXo[6]);
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
       });
+    } 
+     if ( winnerFound && filledBoxes == 9) {
+      setState(() {
+        resulutDeclaration = 'Nobody Wins!';
+      });
     }
+  }
+
+  void _updateScore(String winner) {
+    if (winner == '0') {
+      oScore++;
+    } else if (winner == 'x') {
+      xScore++;
+    }
+    winnerFound = true;
   }
 }
