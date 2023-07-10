@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gameee/redx_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,6 +23,28 @@ class _HomePageState extends State<HomePage> {
     '',
     '',
   ];
+  void clearboard() {
+    setState(() {
+      displayXo = [
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+      ];
+      oScore = 0;
+      xScore = 0;
+      filledBoxes = 0;
+      resulutDeclaration = '';
+      winnerFound = false;
+    });
+  }
+
   int oScore = 0;
   int xScore = 0;
   int filledBoxes = 0;
@@ -33,27 +56,6 @@ class _HomePageState extends State<HomePage> {
     letterSpacing: 3,
     fontSize: 28,
   ));
-  // late List<GameButton> buttonlist;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   buttonlist = doInit();
-  // }
-
-  // List<GameButton> doInit() {
-  //   var gameButtons = <GameButton>[
-  //     new GameButton(id: 1),
-  //     new GameButton(id: 2),
-  //     new GameButton(id: 3),
-  //     new GameButton(id: 4),
-  //     new GameButton(id: 5),
-  //     new GameButton(id: 6),
-  //     new GameButton(id: 7),
-  //     new GameButton(id: 8),
-  //     new GameButton(id: 9),
-  //   ];
-  //   return gameButtons;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -152,33 +154,6 @@ class _HomePageState extends State<HomePage> {
                       );
                     }),
               ),
-
-              // child: GridView.builder(
-              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 3,
-              //     childAspectRatio: 1.0,
-              //     crossAxisSpacing: 6.0,
-              //     mainAxisSpacing: 9.0,
-              //   ),
-              //   itemCount: buttonlist.length,
-              //   itemBuilder: (context, index) => SizedBox(
-              //     height: 100.0,
-              //     width: 100.0,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(8.0),
-              //       child: ElevatedButton(
-              //         onPressed: () {},
-              //         child: Text(
-              //           buttonlist[index].text,
-              //           style: TextStyle(color: Colors.amber, fontSize: 20.0),
-              //         ),
-              //         style: ElevatedButton.styleFrom(
-              //           backgroundColor: buttonlist[index].bg,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ),
             Expanded(
                 // flex: 2,
@@ -189,7 +164,7 @@ class _HomePageState extends State<HomePage> {
             //     child: Text(resulutDeclaration,
             //         style: TextStyle(color: Colors.red, fontSize: 20.0))),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: clearboard,
                 child: Text(
                   'clear board',
                   style: GoogleFonts.quicksand(
@@ -226,6 +201,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check 2row
@@ -235,6 +214,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[3]);
         resulutDeclaration = 'Player' + displayXo[3] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check 3row
@@ -244,6 +227,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[6]);
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check 1column
@@ -253,6 +240,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check 2column
@@ -262,6 +253,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[1]);
         resulutDeclaration = 'Player' + displayXo[1] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check 3column
@@ -271,6 +266,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[2]);
         resulutDeclaration = 'Player' + displayXo[2] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check dignal
@@ -280,6 +279,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[0]);
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
     }
     //check dignal
@@ -289,9 +292,13 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _updateScore(displayXo[6]);
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RedxScreen(
+                  winner: resulutDeclaration,
+                )));
       });
-    } 
-     if ( winnerFound && filledBoxes == 9) {
+    }
+    if (winnerFound && filledBoxes == 9) {
       setState(() {
         resulutDeclaration = 'Nobody Wins!';
       });
