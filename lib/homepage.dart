@@ -333,7 +333,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _updateScore(String winner) {
-    if (winner == '0') {
+    if (winner == 'o') {
       oScore++;
     } else if (winner == 'x') {
       xScore++;
