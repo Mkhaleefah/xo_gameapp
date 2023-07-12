@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool oTurn = true;
+  bool oTurn = false;
   List<String> displayXo = [
     '',
     '',
@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       filledBoxes = 0;
       resulutDeclaration = '';
       winnerFound = false;
+      oTurn = false;
     });
   }
 
@@ -69,15 +70,16 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Expanded(
-                child: Center(
+            //players text
+
+            Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     children: [
                       Text(
-                        'player0',
+                        'player1',
                         style: GoogleFonts.quicksand(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -85,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        oScore.toString(),
+                        xScore.toString(),
                         style: GoogleFonts.quicksand(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -100,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       Text(
-                        'playerx',
+                        'player2',
                         style: GoogleFonts.quicksand(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        xScore.toString(),
+                        oScore.toString(),
                         style: GoogleFonts.quicksand(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -119,7 +121,11 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-            )),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            //grid boxs
             Container(
               height: MediaQuery.of(context).size.height * 0.5,
               decoration:
@@ -155,14 +161,11 @@ class _HomePageState extends State<HomePage> {
                     }),
               ),
             ),
-            Expanded(
-                // flex: 2,
-                child: Text(resulutDeclaration,
-                    style: TextStyle(color: Colors.green, fontSize: 20.0))),
+            //after complete x & o its showing the text
             // Expanded(
             //     // flex: 2,
             //     child: Text(resulutDeclaration,
-            //         style: TextStyle(color: Colors.red, fontSize: 20.0))),
+            //         style: TextStyle(color: Colors.green, fontSize: 20.0))),
             ElevatedButton(
                 onPressed: clearboard,
                 child: Text(
@@ -179,17 +182,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // void _tapped(int index) {
+  //   setState(() {
+  //     if (oTurn && displayXo[index] == '') {
+  //       displayXo[index] = 'x';
+  //       filledBoxes++;
+  //     } else if (!oTurn && displayXo[index] == '') {
+  //       displayXo[index] = '0';
+  //       filledBoxes++;
+  //     }
+  //     oTurn = !oTurn;
+  //     _checkwinner();
+  //   });
+  // }
   void _tapped(int index) {
     setState(() {
-      if (oTurn && displayXo[index] == '') {
-        displayXo[index] = 'x';
+      if (displayXo[index] == '') {
+        if (!oTurn) {
+          displayXo[index] = 'x';
+          // filledBoxes++;
+        } else {
+          displayXo[index] = 'o';
+          // filledBoxes++;
+        }
         filledBoxes++;
-      } else if (!oTurn && displayXo[index] == '') {
-        displayXo[index] = '0';
-        filledBoxes++;
+        oTurn = !oTurn;
+        _checkwinner();
       }
-      oTurn = !oTurn;
-      _checkwinner();
     });
   }
 
@@ -203,6 +222,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -216,6 +236,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[3] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -229,6 +250,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -242,6 +264,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -255,6 +278,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[1] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -268,6 +292,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[2] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -281,6 +306,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[0] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
@@ -294,6 +320,7 @@ class _HomePageState extends State<HomePage> {
         resulutDeclaration = 'Player' + displayXo[6] + 'Wins!';
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => RedxScreen(
+                  // displayXo: resulutDeclaration,
                   winner: resulutDeclaration,
                 )));
       });
