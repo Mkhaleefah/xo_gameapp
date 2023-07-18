@@ -1,5 +1,8 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:gameee/controller/controller.dart';
 import 'package:gameee/homepage.dart';
+import 'package:get/get.dart';
 
 class RedxScreen extends StatefulWidget {
   final String winner;
@@ -14,6 +17,8 @@ class RedxScreen extends StatefulWidget {
 }
 
 class _RedxScreenState extends State<RedxScreen> {
+  Controller controller = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,34 +30,72 @@ class _RedxScreenState extends State<RedxScreen> {
           textAlign: TextAlign.center,
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          Center(
-            child: Container(
-              child: Text(
-                widget.winner,
-                style: TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                // alignment: Alignment.bottomCenter,
+                child: TextButton(
+                  onPressed: () {
+                    controller.controllerCenter.play();
+                    // Navigator.pop(context);
+                  },
+                  child: Text(widget.winner,
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30)),
+                ),
               ),
-            ),
+              Align(
+                alignment: Alignment.center,
+                child: ConfettiWidget(
+                  confettiController: controller.controllerCenter,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  shouldLoop: false,
+                  colors: const [
+                    Colors.green,
+                    Colors.blue,
+                    Colors.pink,
+                    Colors.orange,
+                    Colors.purple,
+                    Colors.black,
+                    Colors.white,
+                  ],
+                ),
+              ),
+              // Center(
+              //   child: Container(
+              //     child: Text(
+              //       widget.winner,
+              //       style: TextStyle(
+              //           color: Colors.amber,
+              //           fontWeight: FontWeight.bold,
+              //           fontSize: 30),
+              //     ),
+              //   ),
+              // ),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 35, vertical: 10)),
+                  onPressed: () {
+                    Navigator.pop(context);
+
+                    // controller.controllerCenter.play();
+                  },
+                  child: Text(
+                    'Play Again',
+                    style: TextStyle(color: Colors.black),
+                  )),
+            ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 10)),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                'play again',
-                style: TextStyle(color: Colors.black),
-              ))
         ],
       ),
     );
