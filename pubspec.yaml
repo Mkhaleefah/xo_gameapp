@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^5.1.0
   get: ^4.6.5
   confetti: ^0.7.0
+  screenshot: ^2.1.0
 
 dev_dependencies:
   flutter_test:

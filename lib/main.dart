@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gameee/confetti.dart';
 import 'package:gameee/homepage.dart';
+import 'package:gameee/screenshot.dart';
 import 'package:get/get.dart';
+import 'package:screenshot/screenshot.dart';
 
 void main() => runApp(new MyApp());
 
@@ -13,7 +15,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.transparent),
-      home: HomePage(),
+      //home: HomePage(),
+      home: ScreenShotPage(
+        title: 'data',
+      ),
       // home: MyAppC(),
     );
   }

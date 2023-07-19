@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gameee/redx_screen.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:screenshot/screenshot.dart';
 
 class Controller extends GetxController {
   late ConfettiController controllerCenter;
@@ -10,6 +11,7 @@ class Controller extends GetxController {
   late ConfettiController controllerCenterLeft;
   late ConfettiController controllerTopCenter;
   late ConfettiController controllerBottomCenter;
+  ScreenshotController screenshotController = ScreenshotController();
   @override
   void onInit() {
     controllerCenter = ConfettiController(duration: const Duration(seconds: 3));
