@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.transparent),
-      //home: HomePage(),
-      home: ScreenShotPage(
-        title: 'data',
-      ),
+      home: HomePage(),
+      // home: ScreenShotPage(
+      //   title: 'data', controller: null,
+      // ),
       // home: MyAppC(),
     );
   }

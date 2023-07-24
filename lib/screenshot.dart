@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 
 class ScreenShotPage extends StatefulWidget {
- ScreenShotPage({Key? key, required this.title}) : super(key: key);
+  ScreenShotPage({Key? key, required this.title, required controller})
+      : super(key: key);
   final String title;
 
   @override

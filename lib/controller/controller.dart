@@ -11,6 +11,7 @@ class Controller extends GetxController {
   late ConfettiController controllerCenterLeft;
   late ConfettiController controllerTopCenter;
   late ConfettiController controllerBottomCenter;
+
   ScreenshotController screenshotController = ScreenshotController();
   @override
   void onInit() {
